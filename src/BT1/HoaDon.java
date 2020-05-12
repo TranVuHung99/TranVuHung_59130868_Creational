@@ -10,47 +10,48 @@ package BT1;
  *
  * @author KimKhanh
  */
+import java.util.ArrayList;
 public class HoaDon {
-    String MaHD, Ngayban, TenKH, SP, SoLuong, DonGia;
-
-    protected HoaDon(Build build) {
-        this.MaHD = build.MaHD;
-        this.Ngayban = build.Ngayban;
-        this.TenKH = build.TenKH;
-        this.SP=build.SP;
-        this.SoLuong=build.SoLuong;
-        this.DonGia=build.DonGia;
-    }
-
-
-    @Override
-    public String toString() {
-        return "HoaDon{" + "MaHD=" + MaHD + ", Ngayban=" + Ngayban + ", TenKH=" + TenKH + ", SP=" + SP + ", SoLuong=" + SoLuong + ", DonGia=" + DonGia + '}';
-    }
+    HoaDonHeader hdh;
+    ArrayList<CTHD> ct = new ArrayList<>();
     
-    public static class Build{
-        String MaHD, Ngayban, TenKH, SP ,SoLuong, DonGia;
+    protected HoaDon(Builder builder)
+    {
+        this.hdh = builder.hdh;
+        this.ct = builder.ct;
+    }
 
-        public Build() {
-        }
-        public Build HoaDonHeader(String MaHD, String Ngayban, String TenKH){
-            this.MaHD = MaHD;
-            this.Ngayban = Ngayban;
-            this.TenKH = TenKH;
-            return this;
-        }
-        
-        public Build CTHD(String SP, String SoLuong, String DonGia ){
-            this.SP = SP;
-            this.SoLuong = SoLuong;
-            this.DonGia = DonGia;
-            return this;
+       
+    public static class Builder
+    {
+        HoaDonHeader hdh;
+        ArrayList<CTHD> ct = new ArrayList<>();
+
+        public Builder() {
+            this.ct = new ArrayList<>();
         }
         
+        public Builder addHeader(HoaDonHeader hdh){
+            this.hdh = hdh;
+            return this;
+        }
+        public Builder addCT(CTHD ct){
+            this.ct.add(ct);
+            return this;
+        }
         public HoaDon build(){
             return new HoaDon(this);
         }
     }
+
+    @Override
+    public String toString() {
+        String s=hdh.toString();
+        for(int i=0;i<ct.size();i++)
+            s+="\n"+ct.get(i).toString();
+        return s;
+    }
+    
 }
     
 
