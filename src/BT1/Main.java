@@ -17,9 +17,18 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        HoaDon hd = new HoaDon.Build()
-                .HoaDonHeader("001","10/04/1999","Hùng")
-                .CTHD("Tivi","10","10000000")
+        HoaDonHeader hdh = new HoaDonHeader("001","10/04/2018","Hùng");
+        CTHD ct1 = new CTHD("Tivi","1","1000000");
+        CTHD ct2 = new CTHD("Tủ lạnh","1","2000000");
+        CTHD ct3 = new CTHD("Máy giặt","1","3000000");
+        CTHD ct4 = new CTHD("Điều hòa","1","4000000");
+        
+        HoaDon hd = new HoaDon.Builder()
+                .addHeader(hdh)
+                .addCT(ct1)
+                .addCT(ct2)
+                .addCT(ct3)
+                .addCT(ct4)
                 .build();
         System.out.println(hd.toString());
     }
